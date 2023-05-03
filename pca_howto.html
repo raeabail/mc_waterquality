@@ -1,0 +1,279 @@
+<html>
+
+<style>
+img {
+    border-radius: 3%;
+}
+</style>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel= "stylesheet" href= "css/style.css">
+    <link rel ="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min1.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://cdnjs.com/libraries/d3-legend"></script>   
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+        <section id = "mySidebar" class="sidebar">
+            <div class="grid">
+                <div class="side">
+                    <p><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a></p>
+                <p><a href="documentation.html">About</a> </p>
+                <p><a href="pca_howto.html">How Does a PCA work?</a> </p>
+                <p><a href="pca_eaglecreek.html">PCA Methods in R</a> </p>
+                <p><a href="pca_ec_results.html">PCA Results</a></p>
+                <p><a href="map.html">Spatial Data</a></p>
+                <p><a href="conclusion.html">Key Takeaways</a></p>
+                <p><a href="glossary.html">Glossary</a> </p>
+                </div>
+            </section>
+        </div>
+
+        <div id="main">
+            <button class="openbtn" onclick="openNav()">☰</button>
+        </div>
+
+        <div class="body">
+            <h3><center><b>What is a Principal Component Analysis (PCA)?</b></center></h3>
+
+            <p> Ed Yong, a British-American science journalist wrote on Twitter in 2012 the following: </p>
+
+            <p><center><b>"Explain principal component analysis to a school child in a tweet."</b></center></p>
+
+            <p> There were a lot of great and funny answers!! For example, @richboden wrote "Something nerds do to show off
+                and that the rest of us secretly don't understand but always look knowingly when it's mentioned." I can't 
+                say I totally disagree... 
+
+                However, the best answer that explained it completely and simplistically was this (from @holtchesley): 
+            </p>
+
+            <p><center><b>"Compare the height, eye color, hair length, hair color, weight, and 15 other variables
+                of the people around you. Ask this question: Where do you notice the most difference?"
+            </b></center></p>
+
+            <p> At the end of the day, that is what a PCA does. It takes all of these variables and the data associated,
+                it reduces/simplifies the data, it plots the data, and it shows you where the most difference is in your dataset. 
+            </p>
+
+            <h4>Definition</h4>
+
+            <p> Below is a video created by Josh Starmer explaining and visualizing what a PCA is and how it works
+                in 5 minutes! </p>
+
+            <div style="text-align: center;">    
+            <iframe width="700", height="400" src="https://www.youtube.com/embed/HMOI_lkzW08"
+            frameborder = "0" allowfullscreen = "allowfullscreen" >
+        </iframe></div>
+
+        <p></p>
+        <p>In short, a PCA reduces the dimensions of a given dataset by transforming a large set of variables into smaller 
+            ones that still contains most of the information from the original dataset. Now, when a dataset is reduced, the 
+            tradeoff is a little accuracy for simplicity. Smaller datasets are much easier to explore, visualize, and analyze
+            without unrelated and/or irrelevant variables to process. 
+
+            To sum it up, a PCA: <b>reduces the number of variables in a dataset while preserving the most information, 
+                allowing you to see the most difference between relevant variables in a dataset. 
+            </b>
+        </p>
+        <p> Now, for a more in-depth explanation of a PCA, keep scrolling!</p>
+        <hr>
+
+        <h4>Step-by-step Explanation</h4>
+        <p>Even if you don't have a strong mathematical background, this explanation is for you! Below, a PCA is 
+            broken down into the following 4 steps: 
+        </p>
+
+        <ol>
+            <li>Standarize the range of variables in your dataset.</li>
+            <li>Calculate a covariance matrix to identify correlations.</li>
+            <li>Calculate the eigenvectors and eigenvalues of the covariance matrix to identify principal components.</li>
+            <li>Plot the data along the principal component axes.</li>
+        </ol>
+
+        <hr>
+
+        <h5><u>1. Standarize the range of variables in your dataset.</u></h5>
+        <p>It is important to standarize your dataset for a PCA for two reasons. One is so that each variable contributes 
+            equally to the analysis. The second is that if there are large differences between the ranges of variables, those
+            variables with larger ranges will dominate over those with small ranges. This will lead to biased results. 
+           </p>
+         
+        <p>Mathematically, this can be via the following equation for each variable: </p>   
+        <p style="text-align: center;">
+        <img src="z_score.png" alt="z_score"
+            width="281"
+            height="250"></p>
+
+        <p>Once the standardization is done, all the variables will be transformed to the same scale.</p>    
+
+        <h5><u>2. Calculate a covariance matrix to identify correlations.</u></h5>
+        <p>This step allows us to how the variables of the dataset vary from the mean with respect to each other. 
+            Some variables may be highly correlated and some may be lowly correlated and to find out, a covariance matrix
+            is created.
+        </p>
+
+        <img src="covariance_matrix.png" alt="z_score"
+                    width="325"
+                    height="350" 
+                    align = "right">
+
+        <p> The covariance matrix is a p x p matrix (where p is the number of dimensions) that has the covariances 
+            associated with all possible pairs of the initial variables. For example, the dataset below shows a dataset
+            with a group of students and the grades they received in various subjects. </p>
+
+        <p>To the right is a dataset and calculated covariance matrix (calculated via Microsoft Excel) that shows how the variables
+            are related. In this case, the covariance between Sociology and Math is positive (1.33333), and the covariance
+            between Math and Physics is positive (7.88889). This means that scores tend to covary in a positive way. 
+            As scores tend to go up in Math, scores in Sociology and Physics also tend to go up. On the hand, the 
+            covariance between Physics and Sociology is negative (-7.25). This means that scores tend to move in 
+            opposite directions. As scores go down in Sociology, scores in Physics tend to go up.  
+        </p>
+
+        <p><u>In short, what matters in this matrix?</u></p>
+
+        <span style="font-size: 24px; border: 2px solid black; font-weight: bold; margin-left: 40%;
+        padding-left: 5px; padding-right: 5px;">
+            THE SIGNS!</span>
+
+        <ul>
+            <li style="margin-top: 1cm;">If the covariance is <span style="color: green; font-weight: bold;">positive</span>, the two variables increase or decrease together (correlated).</li>
+            <li>If the covariance is <span style="color: red; font-weight: bold;">negative</span>, one variable increase (or decreases) when the other decreases (or increase)
+                (inversely correlated).</li>
+
+        </ul>
+
+    <h5><u>3. Calculate the eigenvectors and eigenvalues of the covariance matrix to identify principal components.</u></h5>
+        <p>Eigenvectors and eigenvalues are linear algebra concepts that need to be computed from the covariance matrix
+            in order to determine the principal components. Therefore, they are essentially the stepping stones to where we
+            want to go! 
+        </p>
+
+        <p><b>But... what are principal components?</b></p>
+
+        <dd> → Essentially, they are new variables constructed as a mixture of the initial variables. These mixtures 
+            are created in such a way that the new variables (a.k.a the PRINCIPAL COMPONENTS) are uncorrelated and most of
+            the information from the initial variables is squeezed into the first few components. 
+        </dd>
+
+        <dd> → The idea, then, is if your dataset has 10 dimensions, you will have 10 principal components as a result. 
+            <b><u>BUT</u></b> the PCA will put maximum information in the first component. Then, the maximum remaining 
+            information will be put in the second principal component, and so on for each dimension.  
+        </dd>
+
+        <dd> → A way to visualize principal components is with a <b><u>scree plot.</u></b> Scree plots allow you to 
+        analyze the principal components and discard the components with low information and considering the remaining 
+        components as your new variables. Typically, the first 2 or 3 principal components are kept, and the rest are discarded.
+        A good rule of thumb is that <u>once the slope of the data flattens, those components don't matter</u>.
+         An example is shown below. </dd>
+
+        <p style="text-align: center;"> <img src="screeplot.png" alt="screeplot"
+            width="600"
+            height="400"></p>
+
+        <dd> → Principal components represent the directions of the data that explain a maximal amount of variance. Simply,  
+            they are lines that capture most information of the data. The relationship between variance and information here, 
+            is that, the larger the variance carried by a line, the larger the dispersion of the data points along it, and the 
+            larger the dispersion along a line, the more information it has. 
+            
+            <u>To put all this simply, principal components are new axes that provide the best angle to see and evaluate data, 
+            so that the differences are more visible</u>.</dd>    
+
+        <p><b>Now that we understand principal components, let's get back to eigenvectors and eigenvalues!</b></p>    
+
+        <p>Eigenvectors and eigenvalues ALWAYS come in pairs and there is one pair per dimenision within the dataset used for 
+            the PCA. For example, if you are using a dataset with 5 dimensions, there are 5 variables, 5 eigenvectors, and 
+            5 corresponding eigenvalues. 
+        </p>
+
+        <ul>
+            <li>Eigenvectors: The numbers within the covariance matrix AND are the directions of the axes where there 
+                is the most variance and most information. We call these the Principal Components. 
+            </li>
+
+            <li>Eigenvalues: The coefficients attached to the eigenvectors that give the amount of variance carried 
+                in each principal component.</li>
+        </ul>
+
+        <p>Finally, in order to calculate the percentage of variance (y-axis of the scree plot & information), the eigenvalue of 
+            each component is divided by the sum of eigenvalues. Once placed in descending order (also known as a Feature Vector), 
+            you can find the principal components in order of significance, allowing you to choose whether to keep all the 
+            components or discard the ones of lesser significance, depending on what you are looking for.
+
+    <h5><u>4. Plot the data along the principal component axes.</u></h5>
+
+    <p>From step 3, the goal is to reorient the data from the original axes to the ones represented by the principal components 
+        (hence the name Principal Components Analysis). This can be done by multiplying the transpose of the original data set 
+        by the transpose of the feature vector with the equation below.</p>
+
+        <p style="text-align: center;"> <img src="recast.png" alt="recast"
+            width="700"
+            height="27"></p>
+
+        <p>Once performed, the principal component plot can be created. A few examples are shown below: </p>    
+
+        <img src="pc_ex2.png" alt="pca_ex2"
+        width="400"
+        height="300">
+       
+        <img src="pc_ex1.png" alt="pca_ex1"
+            width="480"
+            height="300">
+
+            <img src="pca_ex3.png" alt="pca_ex3"
+            width="400"
+            height="300">
+
+            <hr>
+
+            <p>On the next page called "PCA Results", the results of the Marion County, IN water quality data from the MCPHD 
+                will be explained, visualized, and analyzed. The overall questions that will be answered are as followed: 
+            </p>
+
+            <ul>
+                <li>What is the overall quality of water in the White River, Eagle Creek, and Fall Creek based on the measured
+                    pollutants from 2003 until present?
+                </li>
+                <li>Are there different levels of pollutant concentrations in each of the waterways? For example, are there
+                    high nitrogen concentrations in the White River but low levels in Fall Creek? 
+                </li>
+            </ul>
+
+        <button type = "button" style = "float: left;" class = "btn btn-light" onclick="window.location.href = 'documentation.html'">← About Page!</button>
+        <button type = "button" style = "float: right;" class = "btn btn-light" onclick="window.location.href = 'pca_eaglecreek.html'">PCA Methods in R! → </button>
+    
+    </div>
+</body>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+
+    function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+    </script>
+
+</html>

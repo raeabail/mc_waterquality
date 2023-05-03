@@ -1,0 +1,673 @@
+<html>
+    <style>
+        code {
+            font-family: Consolas, "courier new";
+            color: crimson;
+            background-color: #f1f1f1;
+            padding: 2px;
+            font-size: 105%;
+            margin-bottom: 1cm;
+        }
+
+        ul {
+            columns: 3;
+        }
+
+        img {
+            border-radius: 3%;
+        }
+    </style>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel= "stylesheet" href= "css/style.css">
+    <link rel ="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min1.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://cdnjs.com/libraries/d3-legend"></script>   
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <section id = "mySidebar" class="sidebar">
+        <div class="grid">
+            <div class="side">
+                <p><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a></p>
+                <p><a href="documentation.html">About</a> </p>
+                <p><a href="pca_howto.html">How Does a PCA work?</a> </p>
+                <p><a href="pca_eaglecreek.html">PCA Methods in R</a> </p>
+                <p><a href="pca_ec_results.html">PCA Results</a></p>
+                <p><a href="map.html">Spatial Data</a></p>
+                <p><a href="conclusion.html">Key Takeaways</a></p>
+                <p><a href="glossary.html">Glossary</a> </p>
+            </div>
+        </section>
+    </div>
+
+    <div id="main">
+        <button class="openbtn" onclick="openNav()">☰</button>
+    </div>
+    <div class="body">
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-light" onclick="window.location.href = 'pca_eaglecreek.html'">Eagle Creek</button>
+            <button type="button" class="btn btn-light" onclick="window.location.href = 'pca_fallcreek.html'" >Fall Creek</button>
+            <button type="button" class="btn btn-light" onclick="window.location.href = 'pca_lowwhite.html'" >Lower White River</button>
+        </div>
+
+        <h3><center>PCA of Fall Creek</center></h3>
+
+        <h5><u>1. Data Preparation</u></h5>
+        <p> To start, following libraries were installed and loaded into R programming: </p>
+       <code>
+        <ul>
+            <li>library(readxl)</li>
+            <li>library(tidyverse)</li>
+            <li>library(dplyr)</li>
+            <li>library(ggplot2)</li>
+            <li>library(EFAtools)</li>
+            <li>library(corrplot)</li>
+            <li>library(gridExtra)</li>
+            <li>library(xtable)</li>
+            <li>library(vegan)</li>
+            <li>library(factoextra)</li>
+            <li>library(RColorBrewer)</li>
+            <li>library(writexl)</li>
+            <li>library(paletteer)</li>
+            <li>library(ggfortify)</li>
+            <li>library(ggrepel)</li>
+            <li>library(wqindex)</li>
+            <li>library(wqbc)</li>
+        </ul>
+       </code>
+       
+       <p>The data for Fall Creek was then loaded into R Programming with the following script:</p>
+       <code>fallcreek <- read_xlsx("~/Desktop/fallcreek.xlsx")</code>
+
+       <p style="margin-top: 0.5cm;">In this dataset, there are total 30 attributes and 753 rows. Some describe the 
+        ocation while others describe the measured pollution. </p>
+
+       <ul>
+        <li>ObjectID</li>
+        <li>Date</li>	
+        <li>Address	</li>
+        <li>Location	</li>
+        <li>Latitude	</li>
+        <li>Longitude 	</li>
+        <li>SampleType	</li>
+        <li>Citation	</li>
+        <li>SpCond	</li>
+        <li>TDS	</li>
+        <li>DO	</li>
+        <li>pH	</li>
+        <li>Temp	</li>
+        <li>E. Coli	</li>
+        <li>Arsenic	</li>
+        <li>Barium 	</li>
+        <li>Cadmium	</li>
+        <li>Chromium	</li>
+        <li>Copper	</li>
+        <li>Lead	</li>
+        <li>Mercury	</li>
+        <li>Nickel	</li>
+        <li>Zinc	</li>
+        <li>Chloride	</li>
+        <li>NO<sub>2</sub></li>
+        <li>NO<sub>3</sub>	</li>
+        <li>PO<sub>4</sub><sup>3-</sup></li>
+        <li>SO<sub>4</sub><sup>2-</sup></li>
+        <li>NH<sub>3</sub></li>
+        <li>Hardness</li>
+       </ul>
+
+       <p> In order to perform a PCA, this dataset needs to be subsetted to only include water quality parameters (i.e. 
+        the last 22 on the above list). 
+       </p>
+
+       <p><code>wq_vars <- c("SpCond", "TDS", "DO", "pH", "Temp", "E. Coli", "Arsenic", "Barium", "Cadmium", "Chromium", 
+        "Copper", "Lead", "Mercury", "Nickel", "Zinc", "Chloride", "NO2", "NO3" "PO4", "S04", "NH3" "Hardness")</code></p>
+        <p><code>pca_fallcreek <- fallcreek[wq_vars]</code></p>
+
+        <p style="margin-top: 1cm;"><b>KMO (Kaiser-Meyer-Olkin) test</b></p>
+
+        <dd> → KMO measures "sampling adequacy" and predicts if data are likely to factor well, based on correlation 
+            and partial correlation.
+        </dd>
+
+        <dd> → If the KMO value is lower then 0.6 then you should inspect those variables to decide which one(s) 
+            should not take part of the factor analysis.
+        </dd>
+
+        <p><code>KMO(pca_eaglecreek)</code></p>
+        <p><b>KMO value = 0.613</b> after removing the following variables: 
+            <ul>
+                <li>(NH<sub>3</sub>)</li>
+                <li>(NO<sub>2</sub>)</li>
+                <li>Mercury</li>
+                <li>Cadium</li>
+                <li>Arsenic</li>
+            </ul>
+        </p>
+
+        <p style="margin-top: 1cm;"><b>Bartlett test</b></p>
+
+        <dd> → The Bartlett test allows you to compare the variance of two or more samples to determine whether they are drawn 
+            from populations with equal variance. More specifically, it compares the correlation matrix with a matrix that mimics
+            variables that are entirely uncorrelated (i.e. an "identity matrix"). It tests whether the relationships in the data 
+            are meaningfully different from uncorrelated variables.
+        </dd>
+        <dd> → The null hypothesis is that there is no difference between the correlation matrix and its identity matrix. If we 
+            fail to reject the null hypothesis, there would be no point in running any kind of factor analysis, such as a PCA.
+        </dd>
+        <dd>
+            → p-value <= 0.05 reject the null hypothesis.  
+        </dd>
+        <dd>
+            → p-value > 0.05 fail to reject the null hypothesis. 
+        </dd>
+
+        <p><code>cortest.bartlett(pca_eaglecreek)</code></p>
+        <p><b>p-value = 0</b>, meaning we can reject the null hypothesis and perform a PCA because we have suitable data!</p>
+
+        <hr>
+
+        <h5><u>2. Standarize the range of variables in this dataset.</u></h5>
+        <p> R makes it really easy to standardize your data. The following code was used: </p>
+
+        <p><code>pca_fallcreek1 <- pca_fallcreek %>%
+            mutate_all(~(scale(.) %>% as.vector))</code></p>
+
+         <hr>
+         
+         <h5><u>3. Calculate a covariance matrix to identify correlations.</u></h5>
+         <p> R also makes it really easy to create a covariance matrix. The below code was used to make the 
+            table following: </p>
+
+         <p><code>ec.cor.table <- cor(pca_fallcreek1)</code></p>
+
+         <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope = "col"></th>
+                    <th scope = "col">SpCond</th>
+                    <th scope = "col">TDS</th>
+                    <th scope = "col">DO</th>
+                    <th scope = "col">pH</th>
+                    <th scope = "col">Temp</th>
+                    <th scope = "col"><i>E. coli</i></th>
+                    <th scope = "col">Barium</th>
+                    <th scope = "col">Chromium</th>
+                    <th scope = "col">Copper</th>
+                    <th scope = "col">Lead</th>
+                    <th scope = "col">Nickel</th>
+                    <th scope = "col">Zinc</th>
+                    <th scope = "col">Chloride</th>
+                    <th scope = "col">NO<sub>3</sub></th>
+                    <th scope = "col">PO<sub>4</sub><sup>3-</sup></th>
+                    <th scope = "col">SO<sub>4</sub><sup>2-</sup></th>
+                    <th scope = "col">Hardness</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">SpCond</th>
+                    <td>1.0000</td>
+                    <td> 0.0613</td>
+                    <td> 0.0832</td>
+                    <td> 0.0700</td>
+                    <td> -0.1654</td>
+                    <td> 0.0219</td>
+                    <td> 0.2593</td>
+                    <td>  0.0063</td>
+                    <td>  0.0234</td>
+                    <td> -0.0244</td>
+                    <td> -0.0347</td>
+                    <td> 0.0064</td>
+                    <td>  0.4639</td>
+                    <td>  0.0219</td>
+                    <td> 0.2498</td>
+                    <td> 0.3405</td>
+                    <td> 0.4515</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">TDS</th>
+                    <td>0.0613</td>
+                    <td> 1.0000</td>
+                    <td>0.7631</td>
+                    <td> 0.0189</td>
+                    <td> 0.8660</td>
+                    <td> 0.0176</td>
+                    <td> 0.1234</td>
+                    <td> -0.0037</td>
+                    <td> 0.0049</td>
+                    <td> -0.0150</td>
+                    <td> -0.0254</td>
+                    <td> -0.0077</td>
+                    <td> 0.2163</td>
+                    <td>-0.0434</td>
+                    <td> 0.0011</td>
+                    <td> 0.1261</td>
+                    <td> 0.1951</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">DO</th>
+                    <td>0.0832</td>
+                    <td>0.7631</td>
+                    <td> 1.0000</td>
+                    <td> 0.0924</td>
+                    <td>0.5309</td>
+                    <td>-0.0281</td>
+                    <td> 0.0420</td>
+                    <td> 0.0350</td>
+                    <td>0.0277</td>
+                    <td>0.0122</td>
+                    <td>-0.0385</td>
+                    <td>-0.0060</td>
+                    <td>0.2283</td>
+                    <td>0.2072</td>
+                    <td>0.0029</td>
+                    <td>0.1600</td>
+                    <td>0.2029</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">pH</th>
+                    <td>-0.0700</td>
+                    <td> 0.0189</td>
+                    <td> 0.0924</td>
+                    <td> 1.0000</td>
+                    <td> -0.0438</td>
+                    <td> -0.0161</td>
+                    <td> 0.0557</td>
+                    <td> -0.0086</td>
+                    <td> -0.0066</td>
+                    <td> -0.0101</td>
+                    <td> -0.0146</td>
+                    <td> -0.0147</td>
+                    <td> 0.0337</td>
+                    <td> -0.0010</td>
+                    <td> -0.0118</td>
+                    <td> 0.0311</td>
+                    <td> 0.0978</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">Temp</th>
+                    <td>-0.1654</td>
+                    <td> 0.8660</td>
+                    <td> 0.5309</td>
+                    <td> -0.0438</td>
+                    <td> 1.0000</td>
+                    <td> 0.0040</td>
+                    <td> -0.0017</td>
+                    <td> -0.0324</td>
+                    <td> -0.0229</td>
+                    <td> -0.0260</td>
+                    <td> -0.0187</td>
+                    <td> 0.0042</td>
+                    <td> -0.0605</td>
+                    <td> -0.1631</td>
+                    <td> -0.0049</td>
+                    <td> -0.1205</td>
+                    <td> -0.0550</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">E. coli</th>
+                    <td>0.0219</td>
+                    <td>0.0176</td>
+                    <td>-0.0281</td>
+                    <td>-0.0161</td>
+                    <td>0.0040</td>
+                    <td>1.0000</td>
+                    <td>0.0082</td>
+                    <td>-0.0407</td>
+                    <td>-0.0197</td>
+                    <td>-0.0248</td>
+                    <td>-0.0450</td>
+                    <td>-0.0107</td>
+                    <td>0.0553</td>
+                    <td>-0.0914</td>
+                    <td>0.0339</td>
+                    <td>0.0230</td>
+                    <td>0.0231</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">Barium</th>
+                    <td>0.2593</td>
+                    <td>0.1234</td>
+                    <td>0.0420</td>
+                    <td>0.0557</td>
+                    <td>-0.0017</td>
+                    <td>0.0082</td>
+                    <td>1.0000</td>
+                    <td>0.0832</td>
+                    <td>0.1600</td>
+                    <td>0.1578</td>
+                    <td>0.0526</td>
+                    <td>0.0710</td>
+                    <td>0.2849</td>
+                    <td>-0.1041</td>
+                    <td>0.0340</td>
+                    <td>0.3046</td>
+                    <td>0.3257</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">Chromium</th>
+                    <td>0.0063</td>
+                    <td>-0.0037</td>
+                    <td>0.0350</td>
+                    <td>-0.0086</td>
+                    <td>-0.0324</td>
+                    <td>-0.0407</td>
+                    <td>0.0832</td>
+                    <td>1.0000</td>
+                    <td>0.0127</td>
+                    <td>0.0283</td>
+                    <td>0.1811</td>
+                    <td>0.0675</td>
+                    <td>0.0198</td>
+                    <td>0.1405</td>
+                    <td>0.0691</td>
+                    <td>0.0376</td>
+                    <td>0.0286</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">Copper</th>
+                    <td>0.0234</td>
+                    <td>0.0049</td>
+                    <td> 0.0277</td>
+                    <td> -0.0066</td>
+                    <td> -0.0229</td>
+                    <td> -0.0197</td>
+                    <td> 0.1600</td>
+                    <td> 0.0127</td>
+                    <td> 1.0000</td>
+                    <td> 0.2074</td>
+                    <td> 0.0671</td>
+                    <td> 0.2053</td>
+                    <td> 0.0113</td>
+                    <td> -0.0165</td>
+                    <td> -0.0109</td>
+                    <td> 0.0584</td>
+                    <td> 0.1237</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">Lead</th>
+                    <td>-0.0244</td>
+                    <td> -0.0150</td>
+                    <td> 0.0122</td>
+                    <td> -0.0101</td>
+                    <td> -0.0260</td>
+                    <td> -0.0248</td>
+                    <td> 0.1578</td>
+                    <td> 0.0283</td>
+                    <td> 0.2074</td>
+                    <td> 1.0000</td>
+                    <td> 0.2190</td>
+                    <td> 0.1971</td>
+                    <td> 0.0088</td>
+                    <td> -0.0140</td>
+                    <td> -0.0292</td>
+                    <td> -0.0102</td>
+                    <td> -0.0545</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">Nickel</th>
+                    <td>-0.0347</td>
+                    <td>-0.0254</td>
+                    <td>-0.0385</td>
+                    <td>-0.0146</td>
+                    <td>-0.0187</td>
+                    <td>-0.0450</td>
+                    <td>0.0526</td>
+                    <td>0.1811</td>
+                    <td> 0.0671</td>
+                    <td>0.2190</td>
+                    <td>1.0000</td>
+                    <td>0.1392</td>
+                    <td>-0.0932</td>
+                    <td>0.1085</td>
+                    <td>-0.0181</td>
+                    <td>-0.0258</td>
+                    <td>-0.0510</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">Zinc</th>
+                    <td>0.0064</td>
+                    <td>-0.0077</td>
+                    <td> -0.0060</td>
+                    <td> -0.0147</td>
+                    <td> 0.0042</td>
+                    <td> -0.0107</td>
+                    <td> 0.0710</td>
+                    <td> 0.0675</td>
+                    <td> 0.2053</td>
+                    <td> 0.1971</td>
+                    <td> 0.1392</td>
+                    <td> 1.0000</td>
+                    <td> 0.1009</td>
+                    <td>-0.0038</td>
+                    <td> -0.0316</td>
+                    <td>0.0622</td>
+                    <td> -0.0479</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">Chloride</th>
+                    <td>0.4639</td>
+                    <td>0.2163</td>
+                    <td>0.2283</td>
+                    <td>0.0337</td>
+                    <td>-0.0605</td>
+                    <td>0.0553</td>
+                    <td>0.2849</td>
+                    <td>0.0198</td>
+                    <td>0.0113</td>
+                    <td>0.0088</td>
+                    <td>-0.0932</td>
+                    <td>0.1009</td>
+                    <td>1.0000</td>
+                    <td>0.0453</td>
+                    <td>0.0295</td>
+                    <td>0.6273</td>
+                    <td>0.4616</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">NO<sub>3</sub></th>
+                    <td>0.0219</td>
+                    <td>-0.0434</td>
+                    <td>0.2072</td>
+                    <td>-0.0010</td>
+                    <td>-0.1631</td>
+                    <td>-0.0914</td>
+                    <td>-0.1041</td>
+                    <td>0.1405</td>
+                    <td>-0.0165</td>
+                    <td>-0.0140</td>
+                    <td> 0.1085</td>
+                    <td>-0.0038</td>
+                    <td>0.0453</td>
+                    <td>1.0000</td>
+                    <td>0.0548</td>
+                    <td>0.1787</td>
+                    <td>0.0051</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">PO<sub>4</sub><sup>3-</sup></th>
+                    <td>0.2498</td>
+                    <td>  0.0011</td>
+                    <td>  0.0029</td>
+                    <td> -0.0118</td>
+                    <td> -0.0049</td>
+                    <td> 0.0339</td>
+                    <td> 0.0340</td>
+                    <td> 0.0691</td>
+                    <td> -0.0109</td>
+                    <td> -0.0292</td>
+                    <td>  -0.0181</td>
+                    <td>  -0.0316</td>
+                    <td>  0.0295</td>
+                    <td>  0.0548</td>
+                    <td> 1.0000</td>
+                    <td> 0.0609</td>
+                    <td> 0.0741</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">SO<sub>4</sub><sup>2-</sup></th>
+                    <td>0.3405</td>
+                    <td> 0.1261</td>
+                    <td> 0.1600</td>
+                    <td> 0.0311</td>
+                    <td> -0.1205</td>
+                    <td> 0.0230</td>
+                    <td> 0.3046</td>
+                    <td> 0.0376</td>
+                    <td> 0.0584</td>
+                    <td> -0.0102</td>
+                    <td> -0.0258</td>
+                    <td> 0.0622</td>
+                    <td> 0.6273</td>
+                    <td> 0.1787</td>
+                    <td> 0.0609</td>
+                    <td> 1.0000</td>
+                    <td> 0.4749</td>
+                </tr>
+
+                <tr class="table table-striped table-hover">
+                    <th scope = "row">Hardness</th>
+                    <td>0.4515</td>
+                    <td> 0.1951</td>
+                    <td> 0.2029</td>
+                    <td> 0.0978</td>
+                    <td> -0.0550</td>
+                    <td> 0.0231</td>
+                    <td> 0.3257</td>
+                    <td> 0.0286</td>
+                    <td>  0.1237</td>
+                    <td>  -0.0545</td>
+                    <td>  -0.0510</td>
+                    <td> -0.0479</td>
+                    <td> 0.4616</td>
+                    <td> 0.0051</td>
+                    <td> 0.0741</td>
+                    <td> 0.4749</td>
+                    <td> 1.0000</td>
+                </tr>
+            </tbody>
+         </table>
+
+         <p> Because tables can be hardto read and analyze effieciently such as the one above, a corrplot was contstructed
+            in R to visualized strong correlations between the variables (a.k.a the correlation matrix).  </p>
+
+        <p> The following code was used to construct the plot:</p>
+        <p><code>fc.cor.plot <- corrplot(fc.cor.table, method = 'number', order = 'alphabet', type = 'lower', diag = FALSE,
+            col = COL2('BrBG'), tl.col = 'black')</code></p>
+
+            <p style="text-align: center;">
+                <img src="fc_corrplot.png" alt="fc_corrplot"
+                    width="700"
+                    height="700"></p>
+
+        <p>Now, we can really see the correlations! Significant ones are any where <b>r > 0.60</b>. In this case, there are 3 
+            strongly positively correlations. 
+        </p>            
+        <ul>
+            <li>Temperature & TDS (r = 0.87)</li>
+            <li>TDS & DO (r = 0.76) </li>
+            <li>SO<sub>4</sub><sup>2-</sup> & Chloride (r = 0.63)</li>
+        </ul>
+
+        <p> Other observations include:</p>
+            <dd> → Positive, but not significant, correlation between Hardness & Chloride (r = 0.46)</dd>
+            <dd> → Positive, but not significant, correlation between Hardness & SO<sub>4</sub><sup>2-</sup> (r = 0.47)</dd>
+    
+    <hr>
+
+    <h5><u>4. Calculate the eigenvectors and eigenvalues of the covariance matrix to identify principal components.</u></h5>   
+    <p> In R, there is nifty function that will calcuate everything you need for a PCA! That function is called 
+        <code>prcomp()</code>. Not only does it calculate the eigenvectors and eigenvalues, but it also calculates the 
+        principal components as well as other values. 
+    </p>
+
+    <p>The following code was used: </p>
+    <p><code>fc_pca <- prcomp(pca_fallcreek, scale = TRUE, center = TRUE)</code></p>
+
+    <p>With these results, visualization and analyses becomes quite easy! </p>
+
+    <p>Next, a scree plot will visualize the principal components. This will help us choose how many principal
+        components to keep and to understand the data better. In order to do this, we have to answer the question: 
+        
+        <p><b>"Where does the slope of the data flatten?"</b></p>
+
+        <p>Wherever the slope of the data flattens, those principal components are discarded. </p>
+    </p>
+
+    <p style="text-align: center;">
+        <img src="fc_screeplot.png" alt="fc_screeplot"
+            width="850"
+            height="450"></p>
+
+    <p>Based on this plot, the slope of the data flattens after the 3rd principal component. Therefore, every principal
+        component after the 3rd is discard, and we will focus on the first three from here on out! 
+    </p>   
+    
+    <p> We also know that based on the scree plot, <b>40.3%</b> of the data is explained within the first 3 principal components.</p>
+    
+    <hr>
+
+    <h5><u>5. Plot the data along the principal component axes.</u></h5>
+    <p>Using the results calculated from the <code>prcomp()</code> function and from the scree plot, a following biplot was created 
+    graphing principal component 1 vs principal component 2.</p>
+
+    <p style="text-align: center;">
+        <img src="fc_biplot.png" alt="fc_biplot"
+            width="950"
+            height="600"></p>
+
+        
+                <button type = "button" style = "float: left;" class = "btn btn-light" onclick="window.location.href = 'pca_howto.html'">← How does a PCA work?! </button>   
+                <button type = "button" style = "float: right;" class = "btn btn-light" onclick="window.location.href = 'pca_ec_results.html'">Summary of PCA results! → </button>         
+            
+</body>
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+    
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+</script>
+
+</html>

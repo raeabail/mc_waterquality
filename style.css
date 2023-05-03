@@ -1,0 +1,154 @@
+body {
+    height: 100vh; 
+    position: relative;
+    display: grid; 
+    grid-template-columns: 70px 1fr;
+    grid-template-rows: 60px 1fr;
+    grid-template-areas: 
+    "side main"
+    ;
+}
+
+.body {
+    background-color: #e9f5f8;
+    grid-area: body;
+    position: relative;
+    padding: 20px;
+    margin-top: -60px;
+}
+
+.body1 {
+    background-color: #e9f5f8;
+    grid-area: body;
+    position: relative;
+    padding: 20px;
+    margin-top: -60px;
+    height: 900px;
+    width: 1300px;
+}
+
+.body2 {
+    background-color: #e9f5f8;
+    grid-area: body;
+    position: relative;
+    padding: 20px;
+    margin-top: -60px;
+    height: 900px;
+    width: 1300px;
+    margin-top: 10px;
+}
+
+
+.main {
+    background-color: #e9f5f8;
+    padding: 15px;
+    grid-area: main;
+}
+
+/*.sidebar {
+    height: 100%;
+    width: 150px;
+    position: fixed;
+    padding: 50px 10px;
+    top: 0;
+    left: 0;
+    padding-top: 40px;
+    grid-area: side;
+    background-color: #f2f2f2;
+    }*/
+
+.sidebar {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #f2f2f2;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+      
+.sidebar a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 18px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+      }
+
+.sidebar ul {
+    list-style: none;
+    padding: 10px;
+}
+
+.sidebar ul li {
+    line-height: 2;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.sidebar a:hover {
+    color: darkblue;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+  
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+
+a:link {
+    color: darkblue;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: darkblue;
+    background-color: transparent;
+    text-decoration: underline dotted darkblue;
+}
+
+a:active {
+    color: darkblue;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.btn-text-left {
+    text-align: left;
+}
+
+.btn-text-right {
+    text-align: right;
+}
+

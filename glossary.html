@@ -1,0 +1,81 @@
+<html> 
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel= "stylesheet" href= "css/style.css">
+    <link rel ="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min1.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://cdnjs.com/libraries/d3-legend"></script>   
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <section id = "mySidebar" class="sidebar">
+        <div class="grid">
+            <div class="side">
+                <p><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a></p>
+                <p><a href="documentation.html">About</a> </p>
+                <p><a href="pca_in_r.html">PCA Methods in R</a></p>
+                <p><a href="pca_ec_results.html">PCA Results</a></p>
+                    <p><a href="map.html">Spatial Data</a></p>
+                    <p><a href="conclusion.html">Key Takeaways</a></p>
+                <p><a href="pca_results.html">PCA Results</a> </p>
+                <p><a href="glossary.html">Glossary</a> </p>
+            </div>
+        </section>
+    </div>
+
+    <div id="main">
+        <button class="openbtn" onclick="openNav()">☰</button>
+    </div>
+
+    <div class="body1">
+        <h3><center>Glossary</center></h3>
+
+        <ul class="list-group">
+            <li onclick="window.location.href = 'nh3.html'" class="list-group-item list-group-item-action">Ammonia (NH<sub>3</sub>)</li>
+            <li onclick="window.location.href = 'chloride.html'" class="list-group-item list-group-item-action">Chloride (Cl<sup>-</sup>)</li>
+            <li onclick="window.location.href = 'DO.html'" class="list-group-item list-group-item-action">Dissolved Oxygen (DO)</li>
+            <li onclick="window.location.href = 'ecoli.html'" class="list-group-item list-group-item-action"><i>E. coli</i></li>
+            <li onclick="window.location.href = 'hardness.html'" class="list-group-item list-group-item-action">Hardness</li>
+            <li onclick="window.location.href = 'metals.html'" class="list-group-item list-group-item-action">Heavy Metals (Ar, Ba, Cd, Cr, Cu, Pb, Hg, Ni, and Zn) </li>
+            <li onclick="window.location.href = 'no3.html'" class="list-group-item list-group-item-action">Nitrate (NO<sub>3</sub>)</li>
+            <li onclick="window.location.href = 'no2.html'" class="list-group-item list-group-item-action">Nitrite (NO<sub>2</sub>)</li>
+            <li onclick="window.location.href = 'pH.html'" class="list-group-item list-group-item-action">pH</li>
+            <li onclick="window.location.href = 'SpCond.html'" class="list-group-item list-group-item-action">Specific Conductivity (Sp Cond)</li>
+            <li onclick="window.location.href = 'sulfate.html'" class="list-group-item list-group-item-action">Sulfate (SO<sub>4</sub><sup>2-</sup>)</li>
+            <li onclick="window.location.href = 'temp.html'" class="list-group-item list-group-item-action">Temperature (Temp)</li>
+            <li onclick="window.location.href = 'TDS.html'" class="list-group-item list-group-item-action">Total Dissolved Solids (TDS)</li>
+            
+          </ul>
+
+    </div>
+
+</body>
+
+<script>
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+</script>
+</html>
