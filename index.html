@@ -1,0 +1,172 @@
+<html>
+<style>
+img {
+    border-radius: 3%;
+}
+
+</style>    
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel= "stylesheet" href= "css/style.css">
+    <link rel ="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min1.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://cdnjs.com/libraries/d3-legend"></script>   
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+        <section id = "mySidebar" class="sidebar">
+            <div class="grid">
+                <div class="side">
+                    <p><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a></p>
+                <p><a href="index.html">About</a> </p>
+                <p><a href="pca_howto.html">How Does a PCA work?</a> </p>
+                <p><a href="pca_eaglecreek.html">PCA Methods in R</a> </p>
+                <p><a href="pca_ec_results.html">PCA Results</a></p>
+                <p><a href="map.html">Spatial Data</a></p>
+                <p><a href="documentation.html">Key Takeaways</a></p>
+                <p><a href="glossary.html">Glossary</a> </p>
+                </div>
+            </section>
+        </div>
+
+        <div id="main">
+            <button class="openbtn" onclick="openNav()">☰</button>
+        </div>
+
+        <div class="body">
+            <h3><center>Water Quality Analysis of Marion County, Indiana</center></h3>
+
+            <img src="mc.jpg" alt="Marion County"
+            width="320"
+            height="280"
+            style="float: right;"/>
+
+            <p>What does this mean?</p>
+
+            <p>... well, it means two <b>major</b> things:</p>
+
+            <ol>
+                <li>On this dashboard, the condition of the local surface water in Marion County, IN will be analyzed, 
+                    explained, and visualized.  </li>
+                <li>On this dashboard, the significance of water quality will also be explained (i.e., why do we care?).</li>
+            </ol>
+
+            <p>In order to analyze water quality, we need <b>data</b>! From the late 1990s until present, the Marion County Public 
+                Health Department (MCPHD) has been sampling various locations. </p>
+
+            <p>The MCPHD is located in Marion County, IN (<a href = "https://marionhealth.org/surface-water-program/">https://marionhealth.org/surface-water-program/</a>). A job that they 
+                perform is monitoring the condition of local streams and rivers, such as the White River, Eagle Creek, and Fall 
+                Creek. They do this by collecting and testing a variety of bacteria, physical, and chemical parameters. These 
+                are called pollutants. The results tell them what warning signs to post. If the results come back good, meaning 
+                there are a low number of pollutants in the water, for an area, they will post a green sign that says, “safe”. 
+                If the results come back good, meaning there are a low number of pollutants in the water, for an area, they will 
+                post a green sign that says, “not safe”. If the water is not safe, people should not swim, play, or drink from 
+                that water.  </p>    
+
+            <p>In Marion County, there are 54 sites that they monitor five times per month for the following parameters: </p> 
+
+            <img src="wq.jpeg" alt="Marion County"
+            width="638"
+            height="360"
+            style="float: right";
+            alt: "https://flores.unu.edu/en/about/media/releases/call-for-water-professionals-to-fill-out-survey-on-water-quality-indicators.html#info";/>
+
+            <ul>
+                <li> <a href = "pH.html" onclick="window.location.href = 'glossary/pH.html'" >pH</a> </li>    
+
+                <li> <a href = "temp.html" onclick="window.location.href = 'glossary/temp.html'">Temperature (Temp)</a> </li> 
+                    
+                <li> <a href = 'DO.html' onclick="window.location.href = 'glossary/DO.html'"> Dissolved Oxygen (DO)</a> </li>
+                    
+                <li> <a href = 'SpCond.html' onclick="window.location.href = 'glossary/SpCond.html'">Specific Conductivity (Sp Cond)</a> </li> 
+                    
+                <li><a href = 'TDS.html' onclick="window.location.href = 'glossary/TDS.html'"> Total Dissolved Solids (TDS)</a> </li> 
+            </ul>
+
+            <p> In Marion County, there are 54 sites that they monitor quarterly for the following parameters: </p>
+            <ul>
+                <li> <a href = 'metals.html' onclick="window.location.href = 'glossary/metals.html'">Heavy Metals (Ar, Ba, Cd, Cr, Cu, Pb, Hg, Ni, and Zn)</a> </li>
+
+                <li> <a href = 'nh3.html' onclick="window.location.href = 'glossary/nh3.html'">Ammonia (NH<sub>3</sub>)</a> </li> 
+                    
+                <li> <a href = 'no2.html' onclick="window.location.href = 'glossary/no2.html'">Nitrite (NO<sub>2</sub>)</a> </li>
+                    
+                <li> <a href = 'no3.html' onclick="window.location.href = 'glossary/no3.html'">Nitrate (NO<sub>3</sub>)</a> </li> 
+                    
+                <li> <a href = 'chloride.html' onclick="window.location.href = 'glossary/chloride.html'">Chloride (Cl<sup>-</sup>)</a> </li>  
+
+                <li> <a href = 'sulfate.html' onclick="window.location.href = 'glossary/sulfate.html'">Sulfate (SO<sub>4</sub><sup>2-</sup>)</a>  </li> 
+
+                <li> <a href = 'ecoli.html' onclick="window.location.href = 'glossary/ecoli.html'"><i>E. coli</i></a>  </li> 
+
+                <li> <a href = 'hardness.html' onclick="window.location.href = 'glossary/hardness.html'">Hardness</a> </li> 
+            </ul>
+
+            <p>So... this might be the point where you are beginning to ask the following questions: 
+                <b>Who cares? What is the point?</b> Just keep reading!! We are getting there!  </p>
+
+            <p> Just like other counties containing major counties containing major cities, Marion County, IN has 
+                experienced a huge acceleration of urbanization over the last few decades. An increase in urbanization 
+                usually is associated with an increase in harmful pollutants being discharged into surface water bodies, 
+                which directly threatens the ecological environment and human health. Data from health departments, such as 
+                the one here in Marion County, are typically uploaded and not analyzed, meaning that they must upload data 
+                but unless one has experience with water quality data, one will not know how to interpret it. Therefore, it 
+                is important and somewhat urgent to evaluate the comprehensive water quality data given in order to understand 
+                and identify the main pollution sources and their ecological and human health impacts. It is also important to 
+                “translate” the data and create visualizations that assist people outside of the scientific community with 
+                understanding water quality data, especially in their local community. </p>    
+
+            <p> There are a lot of <b>attributes</b>... where do we start?  </p>    
+
+            <p> It is a blessing and a curse that we have so much data and that there is so much being tested!! However, 
+                it can make it hard to ultimately determine what is causing water to be not safe for recreation and drinking. 
+                The first step that needs to be taken is to reduce the dataset while also keeping most of the information. </p>
+
+            <p> This is where a Principal Component Analysis, also known as a PCA, comes into play. This analysis will reduce 
+                the parameters in the dataset to only include the major factors that influence the water quality in the 
+                waterways in Marion County, IN.  </p>    
+
+            <p> Click this button to continue to the next page! </p>
+            <button type = "button" class = "btn btn-light" onclick="window.location.href = 'pca_howto.html'">How does a PCA work?! → </button> 
+            
+
+        </div>
+
+
+
+
+</body>
+
+<script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();   
+    });
+
+    function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+    </script>
+
+</html>
